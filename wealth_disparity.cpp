@@ -1,18 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
-int max_wealth(auto id, auto pid){
-	int maxm = -100000000;
-	for(auto it = pid.begin(); it != pid.end(); ++it){
-		int key = it->first;
-		if(key != -1)
-			maxm = max(maxm, id[key] - pid[key]);
-	}
-	return maxm;
-}
 int main()
 {
-	unordered_map<int, int> id, pid;
-	int n = 0;
+	map<int, int> id;
+	int n = 0, maxm = -100000000;
 	cin >> n;
 	int arr[n] = {0};
 	for(int i = 0; i < n; ++i){
@@ -22,8 +13,11 @@ int main()
 	for(int i = 0; i < n; ++i){
 		int p;
 		cin >> p;
-		pid[p] = arr[i];
+		if(p != -1){
+			maxm = max(maxm, id[p] - arr[i]);
+			//cout << "maxm = " << maxm << " id[p] = " << id[p] << " arr[i] = " << arr[i] << endl;
+		}
 	}
-	cout << max_wealth(id, pid) <<endl;
+	cout << maxm <<endl;
 	return 0;
 }
