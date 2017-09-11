@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+int stop = 0;
 void showvec(vector<pair<int, int>> sch){
 	for(int i = 0; i < sch.size(); ++i){
 		cout << "Start : " << sch[i].first << ", End : " << sch[i].second << endl;
@@ -10,17 +11,17 @@ bool comp(pair<int, int> inst1, pair<int, int> inst2){
 	return inst1.second < inst2.second;
 }
 int int_schedule(vector<pair<int, int>> sch){
-	int event = 0, stop = 0;
+	int event = 0;
 	while(!sch.empty()){
+		vector<int> to_del;
 		++event;
+		//cout << "Selected event : Start = " << sch.front().first << ", End = " << sch.front().second << endl; 
 		stop = sch[0].second;
 		sch.erase(sch.begin());
-		for(int i = 0; i < sch.size(); ++i){
-			if(sch[i].first < stop){
-				swap(sch[i], sch.back());
-				sch.pop_back();
-			}
-		}
+		sch.erase(remove_if(sch.begin(), sch.end(),
+			[&sch](const pair<int, int> &x){
+				return x.first < stop;
+				}), sch.end());
 	}
 	return event;
 }
