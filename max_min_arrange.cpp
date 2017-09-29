@@ -1,16 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 void show_max_min(vector<int> box){
-    int n = box.size();
-    vector<int> temp;
-    for(int i = 0; i < n / 2; ++i){
-        temp.push_back(box[n - 1 - i]);
-        temp.push_back(box[i]);
+    int n = box.size(), l = 0, r = n - 1, maxm = box.back() + 1;
+    for(int i = 0; i < n; ++i){
+    	if(i % 2 == 0){
+    		box[i] += (box[r] % maxm) * maxm;
+    		--r;
+    	}
+    	else{
+    		box[i] += (box[l] % maxm) * maxm;
+    		++l;
+    	}
     }
-    if(n % 2 != 0)
-        temp.push_back(box[(n - 1) / 2]);
-    for(auto i : temp)
-        cout << i << " ";
+    for(int i = 0; i < n; ++i)
+    	box[i] /= maxm;
+    for(auto i : box)
+    	cout << i << " ";
     cout << endl;
     return;
 }
