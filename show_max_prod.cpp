@@ -6,7 +6,7 @@ void show_max_prod(vector<int> box){
     for(int i : box){
         if(i > 0){
             max_end *= i;
-            min_end = min(min_end, 1);
+            min_end = min(min_end * i, 1);
         }
         else if(i == 0){
             max_end = 1;
