@@ -7,7 +7,7 @@ void show_max_sum(vector<int> box){
 		max_end += box[i];
 		if(max_so_far < max_end)
 			max_so_far = max_end;
-		if(max_end == 0)
+		if(max_end < 0)
 			max_end = 0;
 	}
 	cout << max_so_far << endl;
