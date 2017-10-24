@@ -81,6 +81,7 @@ Node* flattenList(Node* head){
             temp->child = nullptr;
             if(temp1->child != nullptr)
                 v.push(temp1->child);
+            temp1 = temp1->next;
         }
     }
     Node* head2 = head;
